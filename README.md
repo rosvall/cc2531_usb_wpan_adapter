@@ -31,3 +31,8 @@ make download
 ```sh
 dfu-util -D wpan_fw.dfu
 ```
+
+## See also
+ - [Flash a stock Texas Instruments CC2531USB-RD dongle, no tools required](https://github.com/rosvall/cc2531_oem_flasher)
+ - [Simple USB DFU bootloader for TI CC2531](https://github.com/rosvall/cc2531_bootloader)
+ - [Linux kernel driver for CC2531 WPAN Adapter firmware](https://github.com/rosvall/cc2531_linux)
