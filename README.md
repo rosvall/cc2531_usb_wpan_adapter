@@ -1,7 +1,14 @@
 # WPAN Adapter firmware for CC2531 USB Dongle
 
+Firmware for Texas Instruments CC2531 Dongle to be used with [this Linux kernel driver for CC2531 WPAN Adapter firmware](https://github.com/rosvall/cc2531_linux).
+
 ## Requirements
-- CC2531 based USB dongle with [DFU bootloader](https://github.com/rosvall/cc2531_bootloader/)
+- [dfu-util](https://sourceforge.net/projects/dfu-util/)
+- CC2531 based USB dongle with [DFU bootloader](https://github.com/rosvall/cc2531_bootloader/).
+
+    A stock CC2531USB-RD dongle can be flashed with the DFU bootloader using [this hack](https://github.com/rosvall/cc2531_oem_flasher)
+
+## Build requirements
 - [SDCC](https://sourceforge.net/projects/sdcc/)
 - [dfu-util](https://sourceforge.net/projects/dfu-util/)
 - [binutils](https://www.gnu.org/software/binutils/)
@@ -20,9 +27,7 @@ make
 make download
 ```
 
-## How to flash DFU image to CC2531 dongle
-*Requires CC2531 USB dongle with [DFU bootloader](https://github.com/rosvall/cc2531_bootloader/)*
-
+## How to flash DFU image to CC2531 dongle running [DFU bootloader](https://github.com/rosvall/cc2531_bootloader/).
 ```sh
 dfu-util -D wpan_fw.dfu
 ```
