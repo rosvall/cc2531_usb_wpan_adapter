@@ -19,3 +19,10 @@ make
 # Flash to USB dongle using device firmware upgrade
 make download
 ```
+
+## How to flash DFU image to CC2531 dongle
+*Requires CC2531 USB dongle with [DFU bootloader](https://github.com/rosvall/cc2531_bootloader/)*
+
+```sh
+dfu-util -D wpan_fw.dfu
+```

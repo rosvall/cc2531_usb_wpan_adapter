@@ -25,7 +25,13 @@ C_FILES      = $(wildcard *.c)
 S_FILES      = $(wildcard *.S)
 
 
+# Stuff for bindist
+LICENSE = LICENSES/GPL-3.0-or-later.txt
+README = README.md
+
+
 # Generated files
+BINDIST      = wpan_fw.tar.gz
 DEP_FILES	 = $(C_FILES:.c=.d)
 I_FILES      = $(C_FILES:.c=.i)
 ASM_FILES    = $(C_FILES:.c=.asm) $(S_FILES:.S=.asm)
@@ -37,15 +43,15 @@ MEM_FILES	 = $(ASM_FILES:.asm=.mem)
 RST_FILES	 = $(ASM_FILES:.asm=.rst)
 LST_FILES	 = $(ASM_FILES:.asm=.lst)
 UPLOADED_BIN = uploaded.bin
-IMG_BIN      = img.bin
-IMG_IHX		 = $(IMG_BIN:.bin=.ihx)
-IMG_DFU      = $(IMG_BIN:.bin=.dfu)
-IMG_MEM      = $(IMG_BIN:.bin=.mem)
-LK_FILES     = $(IMG_BIN:.bin=.lk)
+FW_BIN       = wpan_fw.bin
+FW_IHX		 = $(FW_BIN:.bin=.ihx)
+FW_DFU       = $(FW_BIN:.bin=.dfu)
+FW_MEM       = $(FW_BIN:.bin=.mem)
+LK_FILES     = $(FW_BIN:.bin=.lk)
 GENERATED    = $(DEP_FILES) $(I_FILES) $(ASM_FILES) $(LST_FILES) $(REL_FILES) \
                $(SYM_FILES) $(MAP_FILES) $(MEM_FILES) $(RST_FILES) \
-               $(LST_FILES) $(IMG_IHX) $(IMG_BIN) $(IMG_DFU) $(IMG_MEM) \
-               $(LK_FILES) $(UPLOADED_BIN)
+               $(LST_FILES) $(FW_IHX) $(FW_BIN) $(FW_DFU) $(FW_MEM) \
+               $(LK_FILES) $(UPLOADED_BIN) $(BINDIST)
 
 
 # Version tag
@@ -74,18 +80,23 @@ CPPFLAGS    += -DUSB_VID=$(USB_VID)
 CPPFLAGS    += -DCODE_OFFSET=$(CODE_OFFSET)
 
 
-all: info $(IMG_BIN)
+all: info $(FW_DFU)
+
+bindist: $(BINDIST)
+
+$(BINDIST): $(FW_DFU) $(LICENSE) $(README)
+	tar -cvz -f $@ $^
 
 clean:
 	rm -f $(GENERATED)
 
-info: $(IMG_MEM)
-	cat $(IMG_MEM)
+info: $(FW_MEM)
+	cat $(FW_MEM)
 
-download_all: $(IMG_DFU) info
+download_all: $(FW_DFU) info
 	sh dfu_all.sh dfu-util -D $< -R
 
-download: $(IMG_DFU) info
+download: $(FW_DFU) info
 	dfu-util -D $< -R
 
 %.dfu: %.bin
@@ -97,15 +108,15 @@ upload:
 	rm -f $(UPLOADED_BIN)
 	dfu-util -U $(UPLOADED_BIN) -R
 
-flash: $(IMG_BIN)
+flash: $(FW_BIN)
 	# My own hacked-together ESP32 based flasher
 	ccflash write --erase --reset --verify $<
 
 %.bin: %.ihx
 	objcopy --input-target=ihex --output-target=binary $< $@
 
-$(IMG_IHX) $(IMG_MEM) $(RST_FILES): $(REL_FILES) $(LST_FILES)
-	$(CC) -V $(CFLAGS) -o $(IMG_IHX) $(REL_FILES)
+$(FW_IHX) $(FW_MEM) $(RST_FILES): $(REL_FILES) $(LST_FILES)
+	$(CC) -V $(CFLAGS) -o $(FW_IHX) $(REL_FILES)
 
 %.i: %.c
 	$(CC) -E $(CPPFLAGS) $(CFLAGS) $< > $@
@@ -131,6 +142,6 @@ $(IMG_IHX) $(IMG_MEM) $(RST_FILES): $(REL_FILES) $(LST_FILES)
 %.d: %.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -MM $< >$@
 
-.PHONY: all clean info download_all download upload
+.PHONY: all clean info download_all download upload bindist
 
 -include $(DEP_FILES)
