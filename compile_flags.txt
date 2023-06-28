@@ -1,0 +1,31 @@
+-I/usr/share/sdcc/include
+-I/usr/share/sdcc/include/mcs51
+-isystem/usr/share/sdcc/include
+-isystem/usr/share/sdcc/include/mcs51
+-Irelative
+-nostdinc
+-D__SDCC_mcs51
+-D__sfr=unsigned char
+-D__sbit=unsigned char
+-D__bit=_Bool
+-D__code=
+-D__data=
+-D__pdata=
+-D__xdata=
+-D__idata=
+-D__at(x)=
+-D__critical=
+-D__reentrant=
+-DINTERRUPT(name,vect)=void name()
+-D_REENTRANT=
+-DGIT_VERSION_USTR="u\"0.0\""
+-DGIT_VERSION_STR="\"0.0\""
+-DGIT_VERSION_MAJOR=0
+-DGIT_VERSION_MINOR=0
+-DUSB_PID=0xffff
+-DUSB_VID=0x1608
+-DCODE_OFFSET=0x800
+-std=c11
+--target=avr-none-eabi
+-nobuiltininc
+-nostdinc++
