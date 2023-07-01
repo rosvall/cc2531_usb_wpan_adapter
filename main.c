@@ -29,17 +29,7 @@ inline void
 print_csp_state()
 {
 	u8 state;
-	static u8 prev_csp_state;
-
-again:
 	state = RADIO.fsmstat0.fsm_ffctrl_state;
-	/*
-	if (state != prev_csp_state) {
-		prev_csp_state = state;
-		puthex8(state);
-		goto again;
-	}
-	*/
 
 	led_red_off();
 	led_green_off();
