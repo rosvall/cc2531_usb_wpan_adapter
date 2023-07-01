@@ -2,18 +2,14 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "bsp/gpio.h"
 #include "bsp/interrupts.h"
-#include "config/pins.h"
 #include "log.h"
-#include "bootloader.h"
 
 inline void
 hang()
 {
-	for (;;) {
-		__asm__ ("nop");
-	}
+	for (;;)
+		;
 }
 
 void
