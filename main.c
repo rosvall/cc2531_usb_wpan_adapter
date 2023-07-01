@@ -22,10 +22,6 @@ pins_setup()
 {
 	gpio_dir_out(LED_GREEN);
 	gpio_dir_out(LED_RED);
-	gpio_dir_out(DBG_CSPRUNNING);
-	gpio_dir_out(DBG_USB_INTR);
-	gpio_dir_out(DBG_USB_RECV);
-	gpio_dir_out(DBG_USB_SEND);
 	gpio_dir_out(USB_DPLUS);
 }
 

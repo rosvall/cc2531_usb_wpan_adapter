@@ -8,18 +8,6 @@
 #define LED_GREEN_PORT 0
 #define LED_GREEN_PIN  0
 
-#define DBG_USB_INTR_PORT 0
-#define DBG_USB_INTR_PIN  4
-
-#define DBG_CSPRUNNING_PORT 0
-#define DBG_CSPRUNNING_PIN  5
-
-#define DBG_USB_RECV_PORT 0
-#define DBG_USB_RECV_PIN  6
-
-#define DBG_USB_SEND_PORT 0
-#define DBG_USB_SEND_PIN  7
-
 // PORT 1 --------------------------------------------------
 #define USB_DPLUS_PORT 1
 #define USB_DPLUS_PIN  0
