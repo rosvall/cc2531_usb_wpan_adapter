@@ -43,6 +43,14 @@ Endpoint 5 (Bulk IN) sends received IEEE 802.15.4 frames to host.
     A stock CC2531USB-RD dongle can be flashed with the DFU bootloader using [this hack](https://github.com/rosvall/cc2531_oem_flasher)
 
 
+## How to flash DFU image to CC2531 dongle running [DFU bootloader](https://github.com/rosvall/cc2531_bootloader/).
+Requires [dfu-util](https://sourceforge.net/projects/dfu-util/).
+
+```sh
+dfu-util -D wpan_fw.dfu
+```
+
+
 ## Build requirements
 - [SDCC](https://sourceforge.net/projects/sdcc/)
 - [dfu-util](https://sourceforge.net/projects/dfu-util/)
@@ -61,14 +69,6 @@ make
 
 # Flash to USB dongle using device firmware upgrade
 make download
-```
-
-
-## How to flash DFU image to CC2531 dongle running [DFU bootloader](https://github.com/rosvall/cc2531_bootloader/).
-Requires [dfu-util](https://sourceforge.net/projects/dfu-util/).
-
-```sh
-dfu-util -D wpan_fw.dfu
 ```
 
 
