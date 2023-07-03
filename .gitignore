@@ -1,0 +1,13 @@
+*.asm
+*.map
+*.rst
+*.rel
+*.lst
+*.sym
+*.dfu
+*.tar.gz
+*.bin
+*.d
+*.mem
+*.ihx
+*.lk
