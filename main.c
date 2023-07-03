@@ -22,7 +22,6 @@ pins_setup()
 {
 	gpio_dir_out(LED_GREEN);
 	gpio_dir_out(LED_RED);
-	gpio_dir_out(USB_DPLUS);
 }
 
 inline void
