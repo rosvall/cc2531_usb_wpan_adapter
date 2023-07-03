@@ -25,7 +25,7 @@ In addition to the standard USB 2.0 control requests, the following control endp
 | Read FIFO           | 0xC0          | 0x02     | FIFO Address                                 | *D/C*  | Contents of FIFO                                 |
 | Write FIFO          | 0x40          | 0x03     | FIFO Address                                 | *D/C*  | Bytes to be written into specified address       |
 | Transmit            | 0x40          | 0x04     | Non-zero: Disable CSMA, transmit immediately | *D/C*  | IEEE 802.15.4 frame to be written to radio FIFO  |
-| Set CSMA parameters | 0x40          | 0x05     | (retries << 8)|(be_max << 4)|(be_min << 0)   | *D/C*  | *D/C*                                            |
+| Set CSMA parameters | 0x40          | 0x05     | (retries << 8)\|(be_max << 4)\|(be_min << 0) | *D/C*  | *D/C*                                            |
 | DFU_DETACH          | 0x21          | 0x00     | *D/C*                                        | *D/C*  | *D/C*                                            |
 
 *D/C*: Don't care
