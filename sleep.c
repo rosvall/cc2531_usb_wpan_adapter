@@ -29,7 +29,7 @@ sleep()
 	PCON = PCON_IDLE;
 	interrupts_disable();
 
-	// And not we resume here and return to caller, 
+	// And now we resume here and return to caller, 
 	// instead of the interrupt handler that woke us up...
 }
 
