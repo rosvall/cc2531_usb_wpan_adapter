@@ -18,14 +18,14 @@
 
 
 inline void
-pins_setup()
+pins_setup(void)
 {
 	gpio_dir_out(LED_GREEN);
 	gpio_dir_out(LED_RED);
 }
 
 inline void
-print_csp_state()
+print_csp_state(void)
 {
 	u8 state;
 	state = RADIO.fsmstat0.fsm_ffctrl_state;
@@ -41,7 +41,7 @@ print_csp_state()
 }
 
 int
-main()
+main(void)
 {
 	FLASH.ctl = FLASH_CTL_CACHE_MODE_PREFETCH;
 	clk_setup(CLKSPD_32M, TICKSPD_32M, OSC_32MHZ_XTAL, OSC32K_RC);

@@ -5,4 +5,4 @@
 #pragma once
 
 void
-bootloader_enter();
+bootloader_enter(void);

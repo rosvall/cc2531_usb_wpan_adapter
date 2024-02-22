@@ -19,7 +19,7 @@
 extern __bit sleep_now;
 
 static void
-enable_usb_pll()
+enable_usb_pll(void)
 {
 	LOGI(__func__);
 
@@ -29,7 +29,7 @@ enable_usb_pll()
 }
 
 static void
-disable_usb_pll()
+disable_usb_pll(void)
 {
 	LOGI(__func__);
 
@@ -39,7 +39,7 @@ disable_usb_pll()
 }
 
 inline void
-usb_reset()
+usb_reset(void)
 {
 	LOGI(__func__);
 
@@ -52,7 +52,7 @@ usb_reset()
 }
 
 inline void
-usb_suspend()
+usb_suspend(void)
 {
 	LOGI(__func__);
 	disable_usb_pll();
@@ -60,14 +60,14 @@ usb_suspend()
 }
 
 inline void
-usb_resume()
+usb_resume(void)
 {
 	LOGI(__func__);
 	enable_usb_pll();
 }
 
 inline void
-check_wakeup_flag()
+check_wakeup_flag(void)
 {
 	if (P2IFG & P2IFG_DPIF)
 		usb_resume();
@@ -76,7 +76,7 @@ check_wakeup_flag()
 }
 
 inline void
-check_common_flags()
+check_common_flags(void)
 {
 	// Cleared on read
 	u8 flags = USB.cif;
@@ -88,7 +88,7 @@ check_common_flags()
 }
 
 inline void
-check_in_ep_flags()
+check_in_ep_flags(void)
 {
 	// Cleared on read
 	u8 flags = USB.iif;
@@ -104,7 +104,7 @@ check_in_ep_flags()
 }
 
 inline void
-check_out_ep_flags()
+check_out_ep_flags(void)
 {
 	// Cleared on read
 	u8 flags = USB.oif;
@@ -122,7 +122,7 @@ INTERRUPT(usb_intr_handler, INTR_P2INT_USB_I2C)
 }
 
 void
-usb_init()
+usb_init(void)
 {
 	enable_usb_pll();
 

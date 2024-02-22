@@ -16,7 +16,7 @@
 __bit sleep_flag;
 
 static void
-sleep()
+sleep(void)
 {
 	// The instruction immediately following the write to PCON 
 	// is only correctly executed on resume if NOT 4-byte aligned!
@@ -34,7 +34,7 @@ sleep()
 }
 
 void
-sleep_enter_pm1()
+sleep_enter_pm1(void)
 {
 	LOGI(__func__);
 

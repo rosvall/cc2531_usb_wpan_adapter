@@ -14,7 +14,7 @@
 #define disable_radio_pkt_ready_intr() { RADIO.rfirqm0 = 0; }
 
 inline void
-setup_radio_rx()
+setup_radio_rx(void)
 {
 	RFST = CSP_IMM_CMD_STROBE(CSP_CMD_FLUSHRX);
 	RFST = CSP_IMM_CMD_STROBE(CSP_CMD_FLUSHRX);
@@ -27,7 +27,7 @@ setup_radio_rx()
 }
 
 inline void
-setup_usb_rx_endpoint()
+setup_usb_rx_endpoint(void)
 {
 	usb_select_endpoint(RXPKT_EP);
 
@@ -43,7 +43,7 @@ setup_usb_rx_endpoint()
 }
 
 void
-rx_setup()
+rx_setup(void)
 {
 	LOGI(__func__);
 	setup_usb_rx_endpoint();
@@ -53,7 +53,7 @@ rx_setup()
 }
 
 inline void
-rx_pkt()
+rx_pkt(void)
 {
 	LOGI("rx pkt");
 
@@ -80,7 +80,7 @@ rx_radio_intr_handler(u8 flags)
 }
 
 void
-rx_usb_intr_handler()
+rx_usb_intr_handler(void)
 {
 	usb_select_endpoint(RXPKT_EP);
 

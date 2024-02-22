@@ -156,7 +156,7 @@ enum ieee802154_status {
 };
 
 void
-tx_usb_intr_handler();
+tx_usb_intr_handler(void);
 
 void
 tx_radio_intr_handler(u8 flags);
@@ -165,7 +165,7 @@ void
 usb_status_send(u8 status);
 
 void
-tx_setup();
+tx_setup(void);
 
 void
 tx_set_csma_params(u16 packed_params);
@@ -174,7 +174,7 @@ __bit
 tx_prepare(u8 msdu_len);
 
 void
-tx_csma();
+tx_csma(void);
 
 void
-tx_now();
+tx_now(void);

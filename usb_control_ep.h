@@ -5,10 +5,10 @@
 #pragma once
 
 void
-usb_control_intr_handler();
+usb_control_intr_handler(void);
 
 void
-usb_control_init();
+usb_control_init(void);
 
 void
-usb_control_reset();
+usb_control_reset(void);
