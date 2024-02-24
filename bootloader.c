@@ -6,14 +6,14 @@
 #include "log.h"
 
 inline void
-hang()
+hang(void)
 {
 	for (;;)
 		;
 }
 
 void
-bootloader_enter()
+bootloader_enter(void)
 {
 	interrupts_disable();
 	LOGI("Resetting to bootloader through watchdog timeout");

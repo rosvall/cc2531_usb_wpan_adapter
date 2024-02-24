@@ -16,7 +16,7 @@
 #include "tx.h"
 
 void
-radio_setup()
+radio_setup(void)
 {
 	LOGD(__func__);
 	
@@ -135,7 +135,7 @@ INTERRUPT(rf_isr, INTR_RF)
 }
 
 void
-radio_stop()
+radio_stop(void)
 {
 	LOGD(__func__);
 

@@ -8,4 +8,4 @@
 INTERRUPT(usb_intr_handler, INTR_P2INT_USB_I2C);
 
 void
-usb_init();
+usb_init(void);

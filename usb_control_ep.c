@@ -24,7 +24,7 @@
 #define IS_FIFO  0
 
 static struct dma_conf dma;
-static void (* request_done)();
+static void (* request_done)(void);
 static struct usb_setup request;
 static enum {
 	STATE_IDLE,
@@ -41,7 +41,7 @@ static __xdata u8 current_configuration;
 	}
 
 static void
-copy_chunk_with_dma()
+copy_chunk_with_dma(void)
 {
 	u8 n = CTRL_EP_MAXPKTSIZE;
 	do {
@@ -87,7 +87,7 @@ setup_rx_dma(void __xdata * dst, __bit not_fifo)
 }
 
 static __bit
-invalid_ep()
+invalid_ep(void)
 {
 	u8 ep = request.wIndex;
 
@@ -104,7 +104,7 @@ invalid_ep()
 }
 
 inline void
-halt_ep()
+halt_ep(void)
 {
 	// Halt (stall) EP
 
@@ -125,7 +125,7 @@ halt_ep()
 }
 
 inline void
-resume_ep()
+resume_ep(void)
 {
 	// Un-halt EP (clear stall and reset data toggle)
 
@@ -144,7 +144,7 @@ resume_ep()
 }
 
 inline __bit
-is_ep_halted()
+is_ep_halted(void)
 {
 	u8 ep = request.wIndex;
 
@@ -163,7 +163,7 @@ is_ep_halted()
 }
 
 static void
-get_ep_status()
+get_ep_status(void)
 {
 	// Send 0x0001 if endpoint is stalled, 0x0000 otherwise.
 
@@ -182,7 +182,7 @@ get_ep_status()
 }
 
 static void
-set_ep_feature()
+set_ep_feature(void)
 {
 	LOGDX8(__func__, request.wValue);
 
@@ -196,7 +196,7 @@ set_ep_feature()
 }
 
 static void
-clear_ep_feature()
+clear_ep_feature(void)
 {
 	LOGDX8(__func__, request.wValue);
 
@@ -220,7 +220,7 @@ send_zeroes(u8 n)
 }
 
 static void
-get_dev_status()
+get_dev_status(void)
 {
 	LOGD(__func__);
 	// Send 16 bits.
@@ -233,7 +233,7 @@ get_dev_status()
 }
 
 static void
-get_iface_status()
+get_iface_status(void)
 {
 	LOGD(__func__);
 	// iface = request.wIndex
@@ -243,7 +243,7 @@ get_iface_status()
 }
 
 static void
-set_configuration()
+set_configuration(void)
 {
 	u8 conf = request.wValue;
 
@@ -261,7 +261,7 @@ set_configuration()
 }
 
 static void
-get_configuration()
+get_configuration(void)
 {
 	LOGD(__func__);
 
@@ -274,7 +274,7 @@ get_configuration()
 }
 
 static void
-set_address()
+set_address(void)
 {
 	u8 addr = request.wValue;
 
@@ -287,7 +287,7 @@ set_address()
 }
 
 static void
-get_descriptor()
+get_descriptor(void)
 {
 	LOGDX16(__func__, request.wValue);
 
@@ -311,7 +311,7 @@ get_descriptor()
 }
 
 static void
-get_iface_altsetting()
+get_iface_altsetting(void)
 {
 	LOGD(__func__);
 	// iface = request.wIndex
@@ -322,7 +322,7 @@ get_iface_altsetting()
 }
 
 static void
-set_iface_altsetting()
+set_iface_altsetting(void)
 {
 	LOGD(__func__);
 
@@ -350,35 +350,35 @@ set_iface_altsetting()
 }
 
 static void
-vendor_xdata_write()
+vendor_xdata_write(void)
 {
 	LOGDX16(__func__, request.wValue);
 	setup_rx_dma((u8 __xdata *)request.wValue, NOT_FIFO);
 }
 
 static void
-vendor_xdata_read()
+vendor_xdata_read(void)
 {
 	LOGDX16(__func__, request.wValue);
 	setup_tx_dma((u8 __xdata *)request.wValue, NOT_FIFO);
 }
 
 static void
-vendor_fifo_write()
+vendor_fifo_write(void)
 {
 	LOGDX16(__func__, request.wValue);
 	setup_rx_dma((u8 __xdata *)request.wValue, IS_FIFO);
 }
 
 static void
-vendor_fifo_read()
+vendor_fifo_read(void)
 {
 	LOGDX16(__func__, request.wValue);
 	setup_tx_dma((u8 __xdata *)request.wValue, IS_FIFO);
 }
 
 static void
-vendor_tx()
+vendor_tx(void)
 {
 	__bit err = tx_prepare(request.wLength);
 	if (err) {
@@ -394,21 +394,21 @@ vendor_tx()
 }
 
 static void
-vendor_set_csma()
+vendor_set_csma(void)
 {
 	tx_set_csma_params(request.wValue);
 	SET_STATE(STATE_DONE);
 }
 
 static void
-dfu_detach()
+dfu_detach(void)
 {
 	SET_STATE(STATE_DONE);
 	request_done = bootloader_enter;
 }
 
 static void
-handle_request()
+handle_request(void)
 {
 	u8 rt = request.bmRequestType;
 	u8 req = request.bRequest;
@@ -469,7 +469,7 @@ handle_request()
 }
 
 static void
-recv_request()
+recv_request(void)
 {
 	__data u8 * __data dst = (__data u8 * __data) & request;
 	u8 len = sizeof(request);
@@ -479,12 +479,12 @@ recv_request()
 }
 
 static void
-do_nothing()
+do_nothing(void)
 {
 }
 
 void
-usb_control_intr_handler()
+usb_control_intr_handler(void)
 {
 	usb_select_endpoint(CTRL_EP);
 
@@ -541,14 +541,14 @@ usb_control_intr_handler()
 }
 
 void
-usb_control_reset()
+usb_control_reset(void)
 {
 	current_configuration = 0;
 	SET_STATE(STATE_IDLE);
 }
 
 void
-usb_control_init()
+usb_control_init(void)
 {
 	dyn_usb_desc_init();
 	dma_set_mode1(dma, TRIG_NONE, BYTEMODE, ONESHOT, WORD8);

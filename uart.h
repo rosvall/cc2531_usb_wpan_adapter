@@ -9,7 +9,7 @@
 #include "config/pins.h"
 
 inline void
-uart_setup()
+uart_setup(void)
 {
 	usart_set_uart_mode(1);
 	usart_set_baudrate(1, 2000000);

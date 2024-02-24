@@ -7,18 +7,18 @@
 extern __bit sleep_flag;
 
 void
-sleep_enter_pm1();
+sleep_enter_pm1(void);
 
 // Call this from interrupt context to schedule sleep
 inline void
-sleep_soon()
+sleep_soon(void)
 {
 	sleep_flag = 1;
 }
 
 // Call this periodically to sleep if needed from normal context
 inline void
-maybe_sleep()
+maybe_sleep(void)
 {
 	if (sleep_flag) {
 		sleep_flag = 0;

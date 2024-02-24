@@ -10,7 +10,7 @@ INTERRUPT(rferr_isr, INTR_RFERR);
 INTERRUPT(rf_isr, INTR_RF);
 
 void
-radio_setup();
+radio_setup(void);
 
 void
-radio_stop();
+radio_stop(void);

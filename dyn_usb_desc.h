@@ -7,7 +7,7 @@
 #include "int.h"
 
 void
-dyn_usb_desc_init();
+dyn_usb_desc_init(void);
 
 const void __xdata *
 dyn_usb_desc_get(u16 wValue);

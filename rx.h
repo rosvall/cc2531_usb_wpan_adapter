@@ -9,7 +9,7 @@ void
 rx_radio_intr_handler(u8 flags);
 
 void
-rx_usb_intr_handler();
+rx_usb_intr_handler(void);
 
 void
-rx_setup();
+rx_setup(void);

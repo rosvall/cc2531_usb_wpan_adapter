@@ -25,7 +25,7 @@ static u8 csma_retries;
 // aCcaTime = 8 symbol periods
 
 inline void
-setup_mac_timer()
+setup_mac_timer(void)
 {
 	// NOTE: Apparently mac timer is fed from 32MHz clock undivided!
 	// Symbol rate: 62.5k/s => symbol period: 16us
@@ -48,7 +48,7 @@ setup_mac_timer()
 }
 
 inline void
-reset_and_start_mac_timer()
+reset_and_start_mac_timer(void)
 {
 	// Stop mac timer
 	T2CTRL = 0;
@@ -69,7 +69,7 @@ reset_and_start_mac_timer()
 }
 
 static void
-write_csp_csma_program()
+write_csp_csma_program(void)
 {
 	LOGD(__func__);
 
@@ -120,7 +120,7 @@ write_csp_csma_program()
 }
 
 void
-tx_csma()
+tx_csma(void)
 {
 	LOGD(__func__);
 
@@ -134,7 +134,7 @@ tx_csma()
 }
 
 void
-tx_now()
+tx_now(void)
 {
 	LOGI(__func__);
 	RFST = CSP_IMM_CMD_STROBE(CSP_CMD_TXON);
@@ -169,7 +169,7 @@ tx_set_csma_params(u16 packed_params)
 }
 
 inline void
-setup_txstatus_endpoint()
+setup_txstatus_endpoint(void)
 {
 	usb_select_endpoint(INT_EP);
 
@@ -184,7 +184,7 @@ setup_txstatus_endpoint()
 }
 
 inline void
-setup_radio_tx()
+setup_radio_tx(void)
 {
 	RFST = CSP_IMM_CMD_STROBE(CSP_CMD_FLUSHTX);
 
@@ -195,7 +195,7 @@ setup_radio_tx()
 }
 
 void
-tx_setup()
+tx_setup(void)
 {
 	setup_txstatus_endpoint();
 	setup_radio_tx();
@@ -229,7 +229,7 @@ tx_radio_intr_handler(u8 flags)
 }
 
 void
-tx_usb_intr_handler()
+tx_usb_intr_handler(void)
 {
 	usb_select_endpoint(INT_EP);
 

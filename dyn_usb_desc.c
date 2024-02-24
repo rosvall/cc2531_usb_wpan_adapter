@@ -14,7 +14,7 @@ static __xdata struct {
 } serial_desc;
 
 void
-dyn_usb_desc_init()
+dyn_usb_desc_init(void)
 {
 	render_serial_desc(&serial_desc);
 }
