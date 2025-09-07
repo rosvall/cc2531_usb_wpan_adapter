@@ -1,3 +1,8 @@
+> [!NOTE]
+> Moved to [codeberg.org/rosvall/cc2531_usb_wpan_adapter](https://codeberg.org/rosvall/cc2531_usb_wpan_adapter)
+>
+> For reasons given [here](https://github.com/rosvall/goodbye-github)
+
 # WPAN Adapter firmware for CC2531 USB Dongle
 
 Firmware for Texas Instruments CC2531 Dongle to be used with [this Linux kernel driver for CC2531 WPAN Adapter firmware](https://github.com/rosvall/cc2531_linux).
